@@ -1,7 +1,4 @@
-# 🏗️ System Architecture & UML Diagrams
-
-## 1. High-Level Architecture
-```mermaid
+1️⃣ System Architecture (Graph LR)
 graph LR
     User[User] -->|Upload PDF| Frontend["Streamlit UI"]
     Frontend -->|Extract Text| Ingestion["Ingestion Engine"]
@@ -14,7 +11,8 @@ graph LR
     Frontend -->|Context + Query| LLM["Llama 3.1 (Groq)"]
     LLM -->|Generate Answer| User
 
-    sequenceDiagram
+2️⃣ Sequence Diagram
+sequenceDiagram
     actor User
     participant UI as Streamlit UI
     participant DB as Vector Database
@@ -34,17 +32,16 @@ graph LR
     Note over UI, User: Display Phase
     UI-->>User: Displays Answer + Sources
 
-
-
-    flowchart TD
+3️⃣ Flowchart (Ingestion Pipeline)
+flowchart TD
     A[Raw PDF Document] -->|PyPDFLoader| B[Raw Text]
     B -->|Text Cleaning| C[Clean Text]
     C -->|RecursiveSplitter| D["Text Chunks (1000 tokens)"]
     D -->|Sentence-Transformers| E[Vector Embeddings]
     E -->|Indexing| F[("FAISS Database")]
 
-
-    classDiagram
+4️⃣ Class Diagram
+classDiagram
     class Frontend {
         +Streamlit App
         +Chat Interface
@@ -63,24 +60,3 @@ graph LR
     Frontend --> Backend : Sends Files & Queries
     Backend --> DataLayer : Stores/Retrieves Vectors
     DataLayer --> Backend : Returns Context
-
-
-4.  Commit the file.
-
----
-
-### **Step 2: DEPLOY NOW (The Final Step)**
-Since you already have `app.py` and `requirements.txt`, you can start the deployment process **while** you add the diagrams.
-
-1.  Go to **[share.streamlit.io](https://share.streamlit.io/)**
-2.  Log in with GitHub.
-3.  Click the blue **"New App"** button (top right).
-4.  Click **"Use existing repo"**.
-5.  Select your repository: `Enterprise-RAG-Assistant`.
-    * **Branch:** `main`
-    * **Main file path:** `app.py`
-6.  Click **Deploy!**
-
-**Wait about 2-3 minutes.** It will install everything and then **LAUNCH your live website**.
-
-**Tell me when you see the "Success" screen!**
