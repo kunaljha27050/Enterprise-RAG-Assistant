@@ -13,8 +13,8 @@ from langchain_community.vectorstores import FAISS
 from langchain_groq import ChatGroq
 
 # --- API KEY ---
-# ⚠️ For a public repo, it's safer to use st.secrets, but pasting here works for the demo.
-GROQ_API_KEY = "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"
+# ✅ Your New Key is added below:
+GROQ_API_KEY = "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"
 
 # --- CACHING RESOURCES (Speeds up Cloud Performance) ---
 @st.cache_resource
@@ -39,7 +39,7 @@ if "vector_store" not in st.session_state:
 with st.sidebar:
     st.header("📂 Knowledge Base")
     uploaded_files = st.file_uploader("Upload PDFs", type=["pdf"], accept_multiple_files=True)
-
+    
     if uploaded_files and st.button("Process Documents"):
         with st.spinner("Processing on Cloud Server..."):
             try:
@@ -48,21 +48,21 @@ with st.sidebar:
                     # Save temp file
                     with open(uploaded_file.name, "wb") as f:
                         f.write(uploaded_file.getbuffer())
-
+                    
                     # Load and Split
                     loader = PyPDFLoader(uploaded_file.name)
                     documents = loader.load()
                     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
                     texts = text_splitter.split_documents(documents)
                     all_texts.extend(texts)
-
+                
                 # Create Vector Store (FAISS)
                 embeddings = get_embedding_model()
                 st.session_state.vector_store = FAISS.from_documents(all_texts, embeddings)
-
+                
                 st.success(f"✅ Successfully indexed {len(uploaded_files)} document(s)!")
                 st.session_state.messages.append({"role": "assistant", "content": "I have finished reading. Ask me anything!"})
-
+            
             except Exception as e:
                 st.error(f"Error: {e}")
 
@@ -88,16 +88,16 @@ if prompt := st.chat_input("Ask a question..."):
                     retriever = st.session_state.vector_store.as_retriever(search_kwargs={"k": 3})
                     docs = retriever.invoke(prompt)
                     context = "\n\n".join([doc.page_content for doc in docs])
-
+                    
                     # Generate Answer
                     full_prompt = f"Context:\n{context}\n\nQuestion: {prompt}\nAnswer:"
                     llm = get_llm()
                     response = llm.invoke(full_prompt)
-
+                    
                     # Display Answer
                     st.markdown(response.content)
                     st.session_state.messages.append({"role": "assistant", "content": response.content})
-
+                    
                     # Optional: Show Sources
                     with st.expander("View Source Context"):
                         st.write(context)
