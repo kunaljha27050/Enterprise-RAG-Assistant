@@ -52,6 +52,9 @@ An **AI-powered Enterprise Knowledge Assistant** that allows users to chat with 
 
 ## 📸 Screenshots
 
+![stream](https://github.com/user-attachments/assets/2e053ef8-e31a-4635-976c-06cfe770f992)
+
+
 > *Upload your PDFs in the sidebar and start chatting instantly!*
 
 ## 📜 License
