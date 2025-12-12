@@ -1,0 +1,15 @@
+# Ignore Virtual Environment
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Ignore OS files
+.DS_Store
+
+# Ignore User Data (Privacy)
+uploaded_docs/
+temp_uploaded_docs/
+
+# Ignore Secrets (Ideally)
+.env
