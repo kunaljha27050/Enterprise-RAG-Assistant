@@ -24,7 +24,7 @@ def get_embedding_model():
 
 @st.cache_resource
 def get_llm():
-    return ChatGroq(model="llama-3.1-8b-instant", api_key=GROQ_API_KEY)
+    return ChatGroq(model="llama-3.1-8b-instant", api_key=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)
 
 # --- SESSION STATE INITIALIZATION ---
 if "messages" not in st.session_state:
