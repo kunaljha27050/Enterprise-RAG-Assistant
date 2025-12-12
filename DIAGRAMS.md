@@ -1,27 +1,5 @@
 # 🏗️ System Architecture & UML Diagrams
 
-## 1. High-Level Architecture
-This diagram represents the data flow from the user to the RAG Engine and back.
-
-```mermaid
-graph LR
-    User[User] -->|Upload PDF| Frontend[Streamlit UI]
-    Frontend -->|Extract Text| Ingestion[Ingestion Engine]
-    Ingestion -->|Chunk & Embed| EmbedModel[HuggingFace Embeddings]
-    EmbedModel -->|Store Vectors| VectorDB[(FAISS Vector DB)]
-    
-    User -->|Ask Question| Frontend
-    Frontend -->|Search Query| VectorDB
-    VectorDB -->|Retrieve Context| Frontend
-    Frontend -->|Context + Query| LLM[Llama 3.1 (Groq)]
-    LLM -->|Generate Answer| User
-
-Here is the full content for File 4: DIAGRAMS.md. You can copy the code block below and paste it directly into your file.
-
-Markdown
-
-# 🏗️ System Architecture & UML Diagrams
-
 This document outlines the technical architecture, data flow, and interaction sequences for the **Enterprise RAG Assistant**.
 
 ---
@@ -33,13 +11,13 @@ This diagram represents the end-to-end data flow from the user to the RAG Engine
 graph LR
     User[User] -->|Upload PDF| Frontend[Streamlit UI]
     Frontend -->|Extract Text| Ingestion[Ingestion Engine]
-    Ingestion -->|Chunk & Embed| EmbedModel[HuggingFace Embeddings]
-    EmbedModel -->|Store Vectors| VectorDB[(FAISS Vector DB)]
+    Ingestion -->|Chunk & Embed| EmbedModel["HuggingFace Embeddings"]
+    EmbedModel -->|Store Vectors| VectorDB[("FAISS Vector DB")]
     
     User -->|Ask Question| Frontend
     Frontend -->|Search Query| VectorDB
     VectorDB -->|Retrieve Context| Frontend
-    Frontend -->|Context + Query| LLM[Llama 3.1 (Groq)]
+    Frontend -->|Context + Query| LLM["Llama 3.1 (Groq)"]
     LLM -->|Generate Answer| User
 2. Sequence Diagram
 This interaction diagram details the step-by-step process when a user asks a question.
@@ -73,9 +51,9 @@ Code snippet
 flowchart TD
     A[Raw PDF Document] -->|PyPDFLoader| B[Raw Text]
     B -->|Text Cleaning| C[Clean Text]
-    C -->|RecursiveSplitter| D[Text Chunks (1000 tokens)]
+    C -->|RecursiveSplitter| D["Text Chunks (1000 tokens)"]
     D -->|Sentence-Transformers| E[Vector Embeddings]
-    E -->|Indexing| F[(FAISS Database)]
+    E -->|Indexing| F[("FAISS Database")]
 4. Component Diagram
 A breakdown of the internal software components.
 
