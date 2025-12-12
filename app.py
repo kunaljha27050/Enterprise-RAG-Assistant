@@ -14,7 +14,7 @@ from langchain_groq import ChatGroq
 
 # --- API KEY ---
 # ⚠️ For a public repo, it's safer to use st.secrets, but pasting here works for the demo.
-GROQ_API_KEY = "API_KEY"
+GROQ_API_KEY = "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"
 
 # --- CACHING RESOURCES (Speeds up Cloud Performance) ---
 @st.cache_resource
